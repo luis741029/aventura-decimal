@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Aventura Decimal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', sans-serif;
+      background: #eef6fc;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1.2em;
+      background-color: #58a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #347;
+    }
+
+    .character {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla de inicio -->
+  <div class="screen active" id="inicio">
+    <div class="character">👨‍🏫 ¡Hola! Soy Decimalín, tu guía en esta aventura.</div>
+    <h1>Aventura Decimal</h1>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Comenzar</button>
+  </div>
+
+  <!-- Menú de niveles -->
+  <div class="screen" id="niveles">
+    <h2>Selecciona un nivel</h2>
+    <button class="btn" onclick="mostrarPantalla('nivel1')">Nivel 1: Fracción a Decimal</button>
+    <button class="btn" onclick="mostrarPantalla('nivel2')">Nivel 2: Valor Posicional</button>
+    <button class="btn" onclick="mostrarPantalla('nivel3')">Nivel 3: Comparar y Ordenar</button>
+    <button class="btn" onclick="mostrarPantalla('nivel4')">Nivel 4: Lectura y Escritura</button>
+    <button class="btn" onclick="mostrarPantalla('nivel5')">Nivel 5: Redondeo</button>
+    <button class="btn" onclick="mostrarPantalla('nivel6')">Nivel 6: Recta Numérica</button>
+    <br><br>
+    <button class="btn" onclick="mostrarPantalla('inicio')">Volver al inicio</button>
+  </div>
+
+  <!-- Niveles -->
+  <div class="screen" id="nivel1">
+    <h2>Nivel 1: Fracción a Decimal</h2>
+    <p>🧮 Aquí irá el juego de convertir fracciones a decimales.</p>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+  </div>
+
+  <div class="screen" id="nivel2">
+    <h2>Nivel 2: Valor Posicional</h2>
+    <p>🔢 Aquí irá el juego para reconocer décimas, centésimas y milésimas.</p>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+  </div>
+
+  <div class="screen" id="nivel3">
+    <h2>Nivel 3: Comparar y Ordenar</h2>
+    <p>📊 Aquí irá el juego para ordenar números decimales.</p>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+  </div>
+
+  <div class="screen" id="nivel4">
+    <h2>Nivel 4: Lectura y Escritura</h2>
+    <p>📝 Aquí irá el juego para leer y escribir correctamente números decimales.</p>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+  </div>
+
+  <div class="screen" id="nivel5">
+    <h2>Nivel 5: Redondeo</h2>
+    <p>🎯 Aquí irá el juego para redondear números decimales.</p>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+  </div>
+
+  <div class="screen" id="nivel6">
+    <h2>Nivel 6: Recta Numérica</h2>
+    <p>📍 Aquí irá el juego para ubicar decimales en la recta numérica.</p>
+    <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+  </div>
+
+  <script>
+    function mostrarPantalla(id) {
+      const screens = document.querySelectorAll('.screen');
+      screens.forEach(screen => screen.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
