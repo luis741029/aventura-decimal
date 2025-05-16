@@ -1,76 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aventura Decimal</title>
-<style>
-  body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background: #eef6fc;
-    text-align: center;
-    padding: 20px;
-    margin: 0;
-  }
-  .screen {
-    display: none;
-    padding: 20px;
-  }
-  .active {
-    display: block;
-  }
-  .btn {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 1.2em;
-    background-color: #58a;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  .btn:hover {
-    background-color: #347;
-  }
-  .character {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  .number {
-    font-size: 3em;
-    letter-spacing: 0.2em;
-    margin-bottom: 30px;
-  }
-  .digit {
-    display: inline-block;
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 2px solid #0077cc;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .digit.correct {
-    background-color: #a8e6a3;
-    color: #2a6d1f;
-    border-color: #2a6d1f;
-    cursor: default;
-  }
-  .digit.incorrect {
-    background-color: #f8a5a5;
-    color: #7a1f1f;
-    border-color: #7a1f1f;
-  }
-  .question {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-  .feedback {
-    font-size: 1.3em;
-    margin-top: 20px;
-    height: 1.5em;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aventura Decimal</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #eef6fc;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+    .screen { display: none; padding: 20px; }
+    .active { display: block; }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1.2em;
+      background-color: #58a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn:hover { background-color: #347; }
+    .character { font-size: 2em; margin-bottom: 20px; }
+    .feedback { font-size: 1.2em; margin-top: 15px; height: 1.5em; }
+    .digit {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: 2px solid #0077cc;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .correct { background-color: #a8e6a3; color: #2a6d1f; border-color: #2a6d1f; }
+    .incorrect { background-color: #f8a5a5; color: #7a1f1f; border-color: #7a1f1f; }
+  </style>
 </head>
 <body>
 
@@ -89,22 +57,29 @@
   <button class="btn" onclick="mostrarPantalla('nivel3')">Nivel 3: Comparar y Ordenar</button>
   <button class="btn" onclick="mostrarPantalla('nivel4')">Nivel 4: Lectura y Escritura</button>
   <button class="btn" onclick="mostrarPantalla('nivel5')">Nivel 5: Redondeo</button>
+  <button class="btn" onclick="mostrarPantalla('nivel6')">Nivel 6: Recta Numérica</button>
   <br><br>
   <button class="btn" onclick="mostrarPantalla('inicio')">Volver al inicio</button>
 </div>
 
 <!-- Nivel 1 -->
 <div class="screen" id="nivel1">
+  <div class="character">🧮 ¡Vamos a convertir fracciones a decimales!</div>
   <h2>Nivel 1: Fracción a Decimal</h2>
-  <p>🧮 Aquí irá el juego de convertir fracciones a decimales.</p>
+  <p id="preguntaFrac"></p>
+  <div id="opcionesFrac" style="margin-bottom: 20px;"></div>
+  <div class="feedback" id="feedbackFrac"></div>
+  <button class="btn" id="siguienteFrac" style="display:none;">Siguiente</button>
+  <br><br>
   <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
 </div>
 
 <!-- Nivel 2 -->
 <div class="screen" id="nivel2">
+  <div class="character">🔢 Vamos a identificar posiciones decimales.</div>
   <h2>Nivel 2: Valor Posicional</h2>
-  <div class="question" id="question">¿Cuál es la cifra de las <strong>décimas</strong>?</div>
-  <div class="number" id="number">
+  <div class="question" id="question2">¿Cuál es la cifra de las <strong>décimas</strong>?</div>
+  <div class="number" id="number2">
     <span class="digit" data-pos="C">3</span>
     <span class="digit" data-pos="U">4</span>
     <span class="digit" data-pos="coma">,</span>
@@ -112,8 +87,8 @@
     <span class="digit" data-pos="c">4</span>
     <span class="digit" data-pos="m">8</span>
   </div>
-  <div class="feedback" id="feedback"></div>
-  <button id="nextBtn" class="btn" style="display:none;">Siguiente pregunta</button>
+  <div class="feedback" id="feedback2"></div>
+  <button class="btn" id="siguiente2" style="display:none;">Siguiente</button>
   <br>
   <button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
 </div>
@@ -142,55 +117,114 @@
 <!-- Nivel 5 -->
 <div class="screen" id="nivel5">
   <h2>Nivel 5: Redondeo</h2>
-  <p>Selecciona el número redondeado a la décima más cercana:</p>
-  <div id="preguntaRedondeo" style="font-size: 1.5em;"></div>
+  <p id="preguntaRedondeo" style="font-size: 1.5em;"></p>
   <div id="opcionesRedondeo" style="margin: 15px 0;"></div>
   <div class="feedback" id="feedback5"></div>
   <button class="btn" id="siguienteRedondeo" style="display:none;">Siguiente</button>
   <br><br><button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
 </div>
 
+<!-- Nivel 6 -->
+<div class="screen" id="nivel6">
+  <h2>Nivel 6: Recta Numérica</h2>
+  <p>¿Dónde se ubica aproximadamente el número <span id="decimalRecta"></span>?</p>
+  <div id="opcionesRecta" style="margin: 15px 0;"></div>
+  <div class="feedback" id="feedback6"></div>
+  <button class="btn" id="siguienteRecta" style="display:none;">Siguiente</button>
+  <br><br><button class="btn" onclick="mostrarPantalla('niveles')">Volver a niveles</button>
+</div>
+
 <script>
+// Función para mostrar pantallas
 function mostrarPantalla(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-// Nivel 2
-const preguntasNivel2 = [
-  {pos: "d", texto: "décimas"},
-  {pos: "c", texto: "centésimas"},
-  {pos: "m", texto: "milésimas"}
+// Nivel 1
+const ejerciciosFrac = [
+  { fraccion: "357/100", correcto: "3,57", opciones: ["35,7", "3,57", "0,357"] },
+  { fraccion: "428/1000", correcto: "0,428", opciones: ["4,28", "0,428", "0,048"] },
+  { fraccion: "12/100", correcto: "0,12", opciones: ["0,12", "1,2", "0,012"] }
 ];
-let q2 = 0;
-document.getElementById("nextBtn").onclick = () => {
-  if (++q2 < preguntasNivel2.length) {
-    cargarPreguntaNivel2();
-  } else {
-    document.getElementById("feedback").textContent = "¡Terminaste el nivel 2!";
-    document.getElementById("nextBtn").style.display = "none";
+let actualFrac = 0;
+function cargarFraccion() {
+  const p = ejerciciosFrac[actualFrac];
+  document.getElementById("preguntaFrac").textContent = `¿Cuál es la forma decimal de: ${p.fraccion}?`;
+  const cont = document.getElementById("opcionesFrac");
+  cont.innerHTML = "";
+  document.getElementById("feedbackFrac").textContent = "";
+  document.getElementById("siguienteFrac").style.display = "none";
+  p.opciones.forEach(op => {
+    const b = document.createElement("button");
+    b.textContent = op;
+    b.className = "btn";
+    b.onclick = () => {
+      if (op === p.correcto) {
+        document.getElementById("feedbackFrac").textContent = "¡Correcto!";
+        document.getElementById("siguienteFrac").style.display = "inline-block";
+      } else {
+        document.getElementById("feedbackFrac").textContent = "Intenta otra vez.";
+      }
+    };
+    cont.appendChild(b);
+  });
+}
+document.getElementById("siguienteFrac").onclick = () => {
+  actualFrac++;
+  if (actualFrac < ejerciciosFrac.length) cargarFraccion();
+  else {
+    document.getElementById("preguntaFrac").textContent = "";
+    document.getElementById("opcionesFrac").innerHTML = "";
+    document.getElementById("feedbackFrac").textContent = "¡Nivel completado!";
+    document.getElementById("siguienteFrac").style.display = "none";
   }
 };
-function cargarPreguntaNivel2() {
-  const p = preguntasNivel2[q2];
-  document.getElementById("question").innerHTML = `¿Cuál es la cifra de las <strong>${p.texto}</strong>?`;
-  document.querySelectorAll("#nivel2 .digit").forEach(d => {
+
+// Aquí irían los scripts de los niveles 2 al 6 (puedo seguir mostrándolos si lo deseas)
+// Nivel 2
+const preguntas2 = [
+  { pos: "d", texto: "décimas" },
+  { pos: "c", texto: "centésimas" },
+  { pos: "m", texto: "milésimas" }
+];
+let actual2 = 0;
+const pregunta2 = document.getElementById("question2");
+const feedback2 = document.getElementById("feedback2");
+const btnSiguiente2 = document.getElementById("siguiente2");
+const digitos2 = document.querySelectorAll("#number2 .digit");
+
+function cargarPregunta2() {
+  const p = preguntas2[actual2];
+  pregunta2.innerHTML = `¿Cuál es la cifra de las <strong>${p.texto}</strong>?`;
+  feedback2.textContent = "";
+  btnSiguiente2.style.display = "none";
+  digitos2.forEach(d => {
     d.classList.remove("correct", "incorrect");
     d.style.pointerEvents = "auto";
     d.onclick = () => {
       if (d.dataset.pos === p.pos) {
         d.classList.add("correct");
-        document.getElementById("feedback").textContent = "¡Correcto!";
-        document.getElementById("nextBtn").style.display = "inline-block";
-      } else {
+        feedback2.textContent = "¡Correcto! 🎉";
+        btnSiguiente2.style.display = "inline-block";
+        digitos2.forEach(x => x.style.pointerEvents = "none");
+      } else if (d.dataset.pos !== "coma") {
         d.classList.add("incorrect");
-        document.getElementById("feedback").textContent = "Intenta otra vez.";
+        feedback2.textContent = "Intenta otra vez 😅";
       }
     };
   });
 }
-cargarPreguntaNivel2();
-
+btnSiguiente2.onclick = () => {
+  actual2++;
+  if (actual2 < preguntas2.length) {
+    cargarPregunta2();
+  } else {
+    pregunta2.innerHTML = "";
+    feedback2.textContent = "¡Nivel completado! 🎊";
+    btnSiguiente2.style.display = "none";
+  }
+};
 // Nivel 3
 const ordenNums = ["20,7", "20,129", "20,08", "20,13", "28,54"];
 let ordenSeleccion = [];
@@ -211,7 +245,6 @@ function crearBotonesOrden() {
     cont.appendChild(b);
   });
 }
-crearBotonesOrden();
 document.getElementById("checkOrderBtn").onclick = () => {
   const numVals = ordenSeleccion.map(n => parseFloat(n.replace(",", ".")));
   let ok = true;
@@ -221,7 +254,6 @@ document.getElementById("checkOrderBtn").onclick = () => {
   document.getElementById("feedback3").textContent = ok ? "¡Correcto!" : "Intenta otra vez.";
 };
 document.getElementById("resetOrderBtn").onclick = crearBotonesOrden;
-
 // Nivel 4
 const ejerciciosLectura = [
   {
@@ -273,8 +305,6 @@ document.getElementById("siguienteLectura").onclick = () => {
     document.getElementById("siguienteLectura").style.display = "none";
   }
 };
-cargarLectura();
-
 // Nivel 5
 const ejerciciosRedondeo = [
   {numero: "9,71", correcto: "9,7", opciones: ["9,6", "9,7", "9,8"]},
@@ -314,7 +344,57 @@ document.getElementById("siguienteRedondeo").onclick = () => {
     document.getElementById("siguienteRedondeo").style.display = "none";
   }
 };
-cargarRedondeo();
+// Nivel 6
+const ejerciciosRecta = [
+  { numero: "0,25", opciones: ["0,1", "0,25", "0,9"], correcto: "0,25" },
+  { numero: "0,75", opciones: ["0,25", "0,5", "0,75"], correcto: "0,75" },
+  { numero: "0,5", opciones: ["0,25", "0,5", "0,9"], correcto: "0,5" }
+];
+let actualRecta = 0;
+function cargarRecta() {
+  const p = ejerciciosRecta[actualRecta];
+  document.getElementById("decimalRecta").textContent = p.numero;
+  const cont = document.getElementById("opcionesRecta");
+  cont.innerHTML = "";
+  document.getElementById("feedback6").textContent = "";
+  document.getElementById("siguienteRecta").style.display = "none";
+  p.opciones.forEach(op => {
+    const b = document.createElement("button");
+    b.textContent = op;
+    b.className = "btn";
+    b.onclick = () => {
+      if (op === p.correcto) {
+        document.getElementById("feedback6").textContent = "¡Correcto!";
+        document.getElementById("siguienteRecta").style.display = "inline-block";
+      } else {
+        document.getElementById("feedback6").textContent = "Intenta otra vez.";
+      }
+    };
+    cont.appendChild(b);
+  });
+}
+document.getElementById("siguienteRecta").onclick = () => {
+  actualRecta++;
+  if (actualRecta < ejerciciosRecta.length) cargarRecta();
+  else {
+    document.getElementById("decimalRecta").textContent = "";
+    document.getElementById("opcionesRecta").innerHTML = "";
+    document.getElementById("feedback6").textContent = "¡Nivel completado!";
+    document.getElementById("siguienteRecta").style.display = "none";
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarFraccion();     // Nivel 1
+  cargarPregunta2();    // Nivel 2
+  crearBotonesOrden();  // Nivel 3
+  cargarLectura();      // Nivel 4
+  cargarRedondeo();     // Nivel 5
+  cargarRecta();        // Nivel 6
+});
+
 </script>
+
 </body>
 </html>
+
